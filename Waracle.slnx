@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="Waracle.Data/Waracle.Data.csproj" />
+  <Project Path="WaracleTask/WaracleTask.csproj" />
+</Solution>

@@ -1,0 +1,40 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build results
+[Bb]in/
+[Oo]bj/
+
+# Rider
+.idea/
+
+# Visual Studio Code
+.vscode/
+
+# NuGet
+*.nupkg
+projects/*/packages/
+
+# Logs
+*.log
+
+# Database
+*.mdf
+*.ldf
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# JetBrains
+*.iml
+
+# Temporary files
+*.tmp
+
+# Force ignore Git metadata
+.git/

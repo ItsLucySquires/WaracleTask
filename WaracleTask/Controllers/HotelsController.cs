@@ -31,17 +31,28 @@ public class HotelsController : Controller
     [HttpGet("name-search")]
     public async Task<List<Hotel>> GetHotelByName(string name)
     {
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            return new List<Hotel>();
+        }
         var hotels = await _hotelService.GetHotelByName(name);
         return hotels;
     }
 
 
-    // POST: HOTELS/Create
-    // To protect from overposting attacks, enable the specific properties you want to bind to.
-    // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+    /// <summary>
+    /// Creates a new hotel
+    /// </summary>
+    /// <param name="name"></param>
+    /// <returns></returns>
     [HttpPost("create")]
-    public async Task<IActionResult> Create(Hotel hotel)
+    public async Task<IActionResult> Create(string name)
     {
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            return BadRequest("Hotel name cannot be empty.");
+        }
+        var hotel = new Hotel { Name = name };
         await _hotelService.CreateHotel(hotel);
         return Ok();
     }

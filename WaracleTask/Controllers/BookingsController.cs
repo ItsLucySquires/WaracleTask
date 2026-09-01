@@ -75,6 +75,10 @@ public class BookingsController : Controller
     [HttpGet("find-rooms")]
     public async Task<IActionResult> FindRooms(Guid hotelId, DateTime start, DateTime finish, int guests)
     {
+        if (guests > 2)
+        {
+            return BadRequest("Number of guests must be at most 2");
+        }
         var getRooms = await GetAvailableHotelRooms(hotelId, start, finish, guests);
         if (getRooms.Any())
         {
@@ -94,6 +98,10 @@ public class BookingsController : Controller
     [HttpPost("create")]
     public async Task<IActionResult> Create(Guid hotelId, DateTime start, DateTime finish, int guests)
     {
+        if (guests > 2)
+        {
+            return BadRequest("Number of guests must be at most 2");
+        }
         if (start < finish)
         {
             var getRooms = await GetAvailableHotelRooms(hotelId, start, finish, guests);
@@ -108,10 +116,13 @@ public class BookingsController : Controller
                 };
                 await _bookingService.CreateBooking(booking);
                 return Ok(booking);
-
             }
+            return BadRequest("No available rooms for the selected dates and number of guests");
         }
-        return BadRequest();
+        else
+        {
+            return BadRequest("Make sure finish date is after start date");
+        }
     }
 
 }
